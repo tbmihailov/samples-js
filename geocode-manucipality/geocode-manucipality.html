@@ -37,10 +37,10 @@
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[0]) {
                         var manucipality = getPoliticalData(results);
-                        var caption = (manucipality.sublocality!=undefined?("sublocality:" + manucipality.sublocality):"")
-                                    + (manucipality.locality!=undefined?("<br/> locality:" + manucipality.locality):"")
+                        var caption = (manucipality.sublocality != undefined ? ("sublocality:" + manucipality.sublocality) : "")
+                                    + (manucipality.locality != undefined ? ("<br/> locality:" + manucipality.locality) : "")
                         + (manucipality.administrative_area_level_3 != undefined ? ("<br/> adm_level_3:" + manucipality.administrative_area_level_3) : "")
-                        + (manucipality.administrative_area_level_2!=undefined?("<br/> adm_level_2:" + manucipality.administrative_area_level_2):"")
+                        + (manucipality.administrative_area_level_2 != undefined ? ("<br/> adm_level_2:" + manucipality.administrative_area_level_2) : "")
                         + (manucipality.administrative_area_level_1 != undefined ? ("<br/> adm_level_1:" + manucipality.administrative_area_level_1) : "")
                         ;//results[0].formatted_address
                         infoWindow.setContent(caption);
