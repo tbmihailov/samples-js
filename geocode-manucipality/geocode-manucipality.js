@@ -1,4 +1,78 @@
-﻿
+﻿function getPoliticalData(addressResult) {
+    var locality,
+        sublocality,
+        administrative_area_level_1,
+        administrative_area_level_2,
+        administrative_area_level_3;
+    var data = {};
+    for (var i = 0; i < addressResult.length; i++) {
+        var res = addressResult[i];
+        var addrComponents = res.address_components;
+        for (var j = 0; j < addrComponents.length; j++) {
+            if (addrComponents[j].types.indexOf("administrative_area_level_1") != -1) {
+                console.log(addrComponents[j].short_name);
+                if (administrative_area_level_1 != addrComponents[j].short_name)
+                    administrative_area_level_1 = addrComponents[j].short_name;
+            }
+            if (addrComponents[j].types.indexOf("administrative_area_level_2") != -1) {
+                console.log(addrComponents[j].short_name);
+                if (administrative_area_level_2 != addrComponents[j].short_name)
+                    administrative_area_level_2 = addrComponents[j].short_name;
+            }
+            if (addrComponents[j].types.indexOf("administrative_area_level_3") != -1) {
+                console.log(addrComponents[j].short_name);
+                if (administrative_area_level_3 != addrComponents[j].short_name)
+                    administrative_area_level_3 = addrComponents[j].short_name;
+            }
+            if (addrComponents[j].types.indexOf("locality") != -1) {
+                if (locality != addrComponents[j].short_name)
+                    locality = addrComponents[j].short_name;
+            }
+            if (addrComponents[j].types.indexOf("sublocality") != -1) {
+                console.log(addrComponents[j].short_name);
+                if (sublocality != addrComponents[j].short_name)
+                    sublocality = addrComponents[j].short_name;
+            }
+
+        }
+    }
+    var manucipality =
+        {
+            locality: locality,
+            sublocality: sublocality,
+            administrative_area_level_1: administrative_area_level_1,
+            administrative_area_level_2: administrative_area_level_2,
+            administrative_area_level_3: administrative_area_level_3
+        };
+    return manucipality;
+}
+
+function getLocalityAndSublocality(addressResult) {
+    var locality, sublocality;
+    var data = {};
+    for (var i = 0; i < addressResult.length; i++) {
+        var res = addressResult[i];
+        var addrComponents = res.address_components;
+        for (var j = 0; j < addrComponents.length; j++) {
+            if (addrComponents[j].types.indexOf("locality") != -1) {
+                if (locality != addrComponents[j].short_name)
+                    locality = addrComponents[j].short_name;
+            }
+            if (addrComponents[j].types.indexOf("sublocality") != -1) {
+                console.log(addrComponents[j].short_name);
+                if (sublocality != addrComponents[j].short_name)
+                    sublocality = addrComponents[j].short_name;
+            }
+        }
+    }
+    var manucipality =
+        {
+            locality: locality,
+            sublocality: sublocality,
+        };
+    return manucipality;
+}
+
 var tu =
     [
    {
@@ -897,27 +971,3 @@ var selo =
    }
     ];
 
-function getLocalityAndSublocality(addressResult) {
-    var locality, sublocality;
-    for (var i = 0; i < addressResult.length; i++) {
-        var res = addressResult[i];
-        var addrComponents = res.address_components;
-        for (var j = 0; j < addrComponents.length; j++) {
-            if (addrComponents[j].types.indexOf("locality") != -1) {
-                if (locality != addrComponents[j].short_name)
-                    locality = addrComponents[j].short_name;
-            }
-            if (addrComponents[j].types.indexOf("sublocality") != -1) {
-                console.log(addrComponents[j].short_name);
-                if (sublocality != addrComponents[j].short_name)
-                    sublocality = addrComponents[j].short_name;
-            }
-        }
-    }
-    var manucipality =
-        {
-            locality: locality,
-            sublocality: sublocality,
-        };
-    return manucipality;
-}

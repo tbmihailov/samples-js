@@ -36,8 +36,13 @@
             geocoder.geocode({ latLng: event.latLng }, function (results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
                     if (results[0]) {
-                        var manucipality = getLocalityAndSublocality(results);
-                        var caption = "rayon:" + manucipality.sublocality+",\n obshtina:" + manucipality.locality ;//results[0].formatted_address
+                        var manucipality = getPoliticalData(results);
+                        var caption = (manucipality.sublocality!=undefined?("sublocality:" + manucipality.sublocality):"")
+                                    + (manucipality.locality!=undefined?("<br/> locality:" + manucipality.locality):"")
+                        + (manucipality.administrative_area_level_3 != undefined ? ("<br/> adm_level_3:" + manucipality.administrative_area_level_3) : "")
+                        + (manucipality.administrative_area_level_2!=undefined?("<br/> adm_level_2:" + manucipality.administrative_area_level_2):"")
+                        + (manucipality.administrative_area_level_1 != undefined ? ("<br/> adm_level_1:" + manucipality.administrative_area_level_1) : "")
+                        ;//results[0].formatted_address
                         infoWindow.setContent(caption);
                         infoWindow.setPosition(event.latLng);
                         infoWindow.open(map);
