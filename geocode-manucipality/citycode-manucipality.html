@@ -4,7 +4,8 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Google city name</title>
 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places&region=bg&language=bg&sensor=false"></script>
 	<script type="text/javascript" src="/Scripts/jquery-1.7.1.min.js"></script>
     <script src="geocode-manucipality.js"></script>
     <script type="text/javascript">
@@ -296,7 +297,14 @@
 						
 						var text = container.innerHTML;
 						container.style.width = "200px";
-						container.innerHTML = text + "\n" + results[0].address_components[0].short_name;
+						var municipalityStringLine = id+', '
+													+cities[id]+', '
+													+manucipality.locality+', '
+													+manucipality.sublocality+', '
+													+manucipality.administrative_area_level_1+', '
+													+manucipality.administrative_area_level_2+', '
+													+manucipality.administrative_area_level_3;
+            			container.innerHTML = text + "\n" + municipalityStringLine;
 						goNext = true;
 					}
 				}
